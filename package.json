@@ -1,0 +1,83 @@
+{
+	"name": "todo",
+	"version": "0.0.0",
+	"description": "My rad module",
+	"license": "MIT",
+	"repository": "Flaque/todo",
+	"author": {
+		"name": "Flaque",
+		"email": "econrad@zagmail.gonzaga.edu",
+		"url": "flaque.net"
+	},
+	"bin": "cli.js",
+	"engines": {
+		"node": ">=6"
+	},
+	"scripts": {
+		"start": "node cli.js",
+		"test": "xo && ava"
+	},
+	"files": [
+		"cli.js",
+		"ui.js"
+	],
+	"keywords": [
+		""
+	],
+	"dependencies": {
+		"clear": "^0.1.0",
+		"ink": "^0.4.1",
+		"ink-select": "^1.2.0",
+		"ink-select-flaque-patch": "^1.2.0",
+		"ink-text-input": "^1.1.1",
+		"meow": "^3.7.0",
+		"prop-types": "^15.5.10"
+	},
+	"devDependencies": {
+		"ava": "^0.20.0",
+		"babel-plugin-transform-react-jsx": "^6.24.1",
+		"eslint-config-xo-react": "^0.13.0",
+		"eslint-plugin-react": "^7.1.0",
+		"import-jsx": "^1.2.0",
+		"xo": "^0.18.2"
+	},
+	"babel": {
+		"plugins": [
+			[
+				"transform-react-jsx",
+				{
+					"pragma": "h"
+				}
+			]
+		]
+	},
+	"ava": {
+		"babel": {
+			"presets": [
+				"@ava/stage-4"
+			],
+			"plugins": [
+				[
+					"transform-react-jsx",
+					{
+						"pragma": "h",
+						"useBuiltIns": true
+					}
+				]
+			]
+		}
+	},
+	"xo": {
+		"extends": [
+			"xo-react"
+		],
+		"rules": {
+			"react/no-unused-prop-types": 1
+		},
+		"settings": {
+			"react": {
+				"pragma": "h"
+			}
+		}
+	}
+}
