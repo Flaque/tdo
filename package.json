@@ -26,12 +26,14 @@
 	],
 	"dependencies": {
 		"clear": "^0.1.0",
+		"immutable": "^3.8.2",
 		"ink": "^0.4.1",
 		"ink-select": "^1.2.0",
 		"ink-select-flaque-patch": "^1.2.0",
 		"ink-text-input": "^1.1.1",
 		"meow": "^3.7.0",
-		"prop-types": "^15.5.10"
+		"prop-types": "^15.5.10",
+		"uuid": "^3.2.1"
 	},
 	"devDependencies": {
 		"ava": "^0.20.0",

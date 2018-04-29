@@ -2,10 +2,11 @@
 
 const { h, Component, StringComponent, Text } = require("ink");
 const TextInput = require("ink-text-input");
-const { Select, Option, Separator } = require("ink-select-flaque-patch");
 const PropTypes = require("prop-types");
 const importJsx = require("import-jsx");
 const Bar = importJsx("./components/bar");
+const TodoItem = importJsx("./components/todoitem");
+const uuidv4 = require('uuid/v4');
 
 // TODO: Remove when ink 0.4.1 bug is fixed
 const chalk = require("chalk");
@@ -20,7 +21,8 @@ class UI extends Component {
 		super();
 		this.state = {
 			query: "",
-			todos: []
+			todos: [],
+			selected: "none"
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -47,14 +49,12 @@ class UI extends Component {
 
 				<br />
 
-				<Select onSelect={this.handleSelectItem}>
-					{state.todos.map(({ value }) => (
-						<div>
-							{" "}
-							<Option value={value}>{value}</Option>
-						</div>
-					))}
-				</Select>
+				{state.todos.map(({ value, checked, uuid }) => (
+					<TodoItem checked={checked} selected={this.state.selected === uuid}>
+						{value}
+						{"\n"}
+					</TodoItem>
+				))}
 			</div>
 		);
 	}
@@ -70,8 +70,10 @@ class UI extends Component {
 	}
 
 	handleSubmit(value) {
+		const uuid = uuidv4();
+
 		this.setState(prevState => {
-			prevState.todos.push({ value });
+			prevState.todos.push({ value, uuid });
 			prevState.query = "";
 			return prevState;
 		});
