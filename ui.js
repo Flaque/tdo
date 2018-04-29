@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-const {h, Component, StringComponent, Text} = require('ink');
-const TextInput = require('ink-text-input');
-const {Select, Option, Separator} = require('ink-select-flaque-patch');
-const PropTypes = require('prop-types');
-const importJsx = require('import-jsx');
+const { h, Component, StringComponent, Text } = require("ink");
+const TextInput = require("ink-text-input");
+const { Select, Option, Separator } = require("ink-select-flaque-patch");
+const PropTypes = require("prop-types");
+const importJsx = require("import-jsx");
 const Bar = importJsx("./components/bar");
 
 // TODO: Remove when ink 0.4.1 bug is fixed
@@ -15,13 +15,11 @@ class Bold extends StringComponent {
 	}
 }
 
-
 class UI extends Component {
-
 	constructor() {
 		super();
 		this.state = {
-			query: '',
+			query: "",
 			todos: []
 		};
 
@@ -33,21 +31,29 @@ class UI extends Component {
 	render(props, state) {
 		return (
 			<div>
+				<br />
 
-				<br/>
+				<Text>
+					<Bold>Tdo</Bold> <Text gray>Press ctrl-c to exit. </Text> {"\n\n"}
+				</Text>
 
-				<Text><Bold>Tdo</Bold> <Text gray>Press ctrl-c to exit. </Text> {"\n\n"}</Text>
-
-				<Bold>{"~ "}</Bold><TextInput 
+				<Bold>{"~ "}</Bold>
+				<TextInput
 					value={state.query}
 					onChange={this.handleChange}
 					onSubmit={this.handleSubmit}
-					placeholder="ex: feed dogs by saturday"/>
+					placeholder="ex: feed dogs by saturday"
+				/>
 
-				<br/>
+				<br />
 
 				<Select onSelect={this.handleSelectItem}>
-					{state.todos.map(({value}) => <div> <Option value={value}>{value}</Option></div> )}
+					{state.todos.map(({ value }) => (
+						<div>
+							{" "}
+							<Option value={value}>{value}</Option>
+						</div>
+					))}
 				</Select>
 			</div>
 		);
@@ -60,15 +66,15 @@ class UI extends Component {
 	handleChange(value) {
 		this.setState({
 			query: value
-		})
+		});
 	}
 
 	handleSubmit(value) {
-		this.setState((prevState) => {
-			prevState.todos.push({value})
-			prevState.query = ""
-			return prevState
-		})
+		this.setState(prevState => {
+			prevState.todos.push({ value });
+			prevState.query = "";
+			return prevState;
+		});
 	}
 }
 
@@ -77,7 +83,7 @@ UI.propTypes = {
 };
 
 UI.defaultProps = {
-	name: 'Ink'
+	name: "Ink"
 };
 
 module.exports = UI;
