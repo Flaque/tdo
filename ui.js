@@ -3,10 +3,11 @@
 const { h, Component } = require('ink');
 const importJsx = require('import-jsx');
 const { Provider } = require('ink-redux');
-const store = require('./redux/store.js');
+const getStore = require('./redux/store.js');
 
 const App = importJsx('./components/app');
 
+const store = getStore();
 const { stdin } = process;
 
 class UI extends Component {

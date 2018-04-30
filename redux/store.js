@@ -25,7 +25,7 @@ const reducer = (
 		case 'QUERY_CHANGE':
 			return { ...state, ...{ query: action.value } };
 		case 'ENTER_PRESSED':
-			if (!action.value || action.value === '') {
+			if (action.value === undefined || action.value === '') {
 				return {
 					...state,
 					...{ todos: checkTodo(state.todos, state.selectedTodo) }
@@ -47,6 +47,8 @@ const reducer = (
 	}
 };
 
-const store = createStore(reducer);
+const getStore = () => {
+	return createStore(reducer);
+};
 
-module.exports = store;
+module.exports = getStore;
