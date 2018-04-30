@@ -8,7 +8,7 @@ test.beforeEach(() => {
 	store = getStore();
 });
 
-test('QUERY_CHANGE will set the query value', t => {
+test.serial('QUERY_CHANGE will set the query value', t => {
 	store.dispatch({
 		type: 'QUERY_CHANGE',
 		value: 'doggos'
@@ -17,7 +17,7 @@ test('QUERY_CHANGE will set the query value', t => {
 	t.deepEqual(store.getState().query, 'doggos');
 });
 
-test('ENTER_PRESSED will wipe query value', t => {
+test.serial('ENTER_PRESSED will wipe query value', t => {
 	store.dispatch({
 		type: 'ENTER_PRESSED',
 		value: 'doggos'
@@ -26,7 +26,7 @@ test('ENTER_PRESSED will wipe query value', t => {
 	t.deepEqual(store.getState().query, '');
 });
 
-test('ENTER_PRESSED will add new todo', t => {
+test.serial('ENTER_PRESSED will add new todo', t => {
 	store.dispatch({
 		type: 'ENTER_PRESSED',
 		value: 'doggos'
@@ -39,7 +39,7 @@ test('ENTER_PRESSED will add new todo', t => {
 	t.deepEqual(todo.get('value'), 'doggos');
 });
 
-test('ENTER_PRESSED will add new todo with a uuid', t => {
+test.serial('ENTER_PRESSED will add new todo with a uuid', t => {
 	store.dispatch({
 		type: 'ENTER_PRESSED',
 		value: 'doggos'
@@ -53,7 +53,7 @@ test('ENTER_PRESSED will add new todo with a uuid', t => {
 	t.true(isuuid(id));
 });
 
-test('ENTER_PRESSED will set the selection on first submit', t => {
+test.serial('ENTER_PRESSED will set the selection on first submit', t => {
 	store.dispatch({
 		type: 'ENTER_PRESSED',
 		value: 'doggos'
@@ -63,7 +63,7 @@ test('ENTER_PRESSED will set the selection on first submit', t => {
 	t.true(isuuid(id));
 });
 
-test('ENTER_PRESSED will check a box if no value passed', t => {
+test.serial('ENTER_PRESSED will check a box if no value passed', t => {
 	// Add something
 	store.dispatch({
 		type: 'ENTER_PRESSED',
@@ -104,54 +104,60 @@ test('ENTER_PRESSED will check a box if no value passed', t => {
 	t.deepEqual(store.getState().todos.count(), 1);
 });
 
-test('MOVE_CURSOR_DOWN will change the selection to the next todo', t => {
-	store.dispatch({
-		type: 'ENTER_PRESSED',
-		value: 'doggos'
-	});
+test.serial(
+	'MOVE_CURSOR_DOWN will change the selection to the next todo',
+	t => {
+		store.dispatch({
+			type: 'ENTER_PRESSED',
+			value: 'doggos'
+		});
 
-	store.dispatch({
-		type: 'ENTER_PRESSED',
-		value: 'cattos'
-	});
+		store.dispatch({
+			type: 'ENTER_PRESSED',
+			value: 'cattos'
+		});
 
-	store.dispatch({
-		type: 'MOVE_CURSOR_DOWN'
-	});
+		store.dispatch({
+			type: 'MOVE_CURSOR_DOWN'
+		});
 
-	const [first, second] = [...store.getState().todos.keys()];
+		const [first, second] = [...store.getState().todos.keys()];
 
-	// Sanity check
-	t.true(isuuid(first));
-	t.true(isuuid(second));
+		// Sanity check
+		t.true(isuuid(first));
+		t.true(isuuid(second));
 
-	t.deepEqual(second, store.getState().selectedTodo);
-});
+		t.deepEqual(second, store.getState().selectedTodo);
+	}
+);
 
-test('MOVE_CURSOR_DOWN will change the selection to the past todo', t => {
-	store.dispatch({
-		type: 'ENTER_PRESSED',
-		value: 'doggos'
-	});
+test.serial(
+	'MOVE_CURSOR_DOWN will change the selection to the past todo',
+	t => {
+		store.dispatch({
+			type: 'ENTER_PRESSED',
+			value: 'doggos'
+		});
 
-	store.dispatch({
-		type: 'ENTER_PRESSED',
-		value: 'cattos'
-	});
+		store.dispatch({
+			type: 'ENTER_PRESSED',
+			value: 'cattos'
+		});
 
-	store.dispatch({
-		type: 'MOVE_CURSOR_DOWN'
-	});
+		store.dispatch({
+			type: 'MOVE_CURSOR_DOWN'
+		});
 
-	store.dispatch({
-		type: 'MOVE_CURSOR_UP'
-	});
+		store.dispatch({
+			type: 'MOVE_CURSOR_UP'
+		});
 
-	const [first, second] = [...store.getState().todos.keys()];
+		const [first, second] = [...store.getState().todos.keys()];
 
-	// Sanity check
-	t.true(isuuid(first));
-	t.true(isuuid(second));
+		// Sanity check
+		t.true(isuuid(first));
+		t.true(isuuid(second));
 
-	t.deepEqual(first, store.getState().selectedTodo);
-});
+		t.deepEqual(first, store.getState().selectedTodo);
+	}
+);

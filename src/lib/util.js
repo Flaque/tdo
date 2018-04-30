@@ -38,7 +38,8 @@ const checkTodo = (todos, id) => {
 	}
 
 	let todo = todos.get(id);
-	todo = todo.set('checked', !todo.get('checked'));
+	const before = todo.get('checked') || false;
+	todo = todo.set('checked', !before);
 
 	return todos.set(id, todo);
 };

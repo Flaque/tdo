@@ -20,8 +20,8 @@ Check.defaultProps = {
 };
 
 class TodoItem extends Component {
-	render(props) {
-		const { todo, selected } = props;
+	render() {
+		const { todo, selected } = this.props;
 
 		const txt = selected ? (
 			<Text blue>
