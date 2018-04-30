@@ -11,16 +11,18 @@ class Bold extends StringComponent {
 const Check = props => <span>{props.checked ? "[x]" : "[ ]"}</span>;
 
 class TodoItem extends Component {
-	render(props, state) {
-		const txt = props.selected ? (
-			<Bold>{props.children}</Bold>
+	render(props) {
+		const { todo, selected } = props;
+
+		const txt = todo.get("selected") ? (
+			<Bold>{todo.get("value")}</Bold>
 		) : (
-			<span>{props.children}</span>
+			<span>{todo.get("value")}</span>
 		);
 
 		return (
 			<Text>
-				<Check checked={props.checked} /> {txt}
+				<Check checked={todo.get("checked")} /> {txt} <br/>
 			</Text>
 		);
 	}

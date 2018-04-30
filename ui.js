@@ -6,7 +6,8 @@ const PropTypes = require("prop-types");
 const importJsx = require("import-jsx");
 const Bar = importJsx("./components/bar");
 const TodoItem = importJsx("./components/todoitem");
-const uuidv4 = require('uuid/v4');
+const uuidv4 = require("uuid/v4");
+const { Map } = require("immutable");
 
 // TODO: Remove when ink 0.4.1 bug is fixed
 const chalk = require("chalk");
@@ -21,7 +22,7 @@ class UI extends Component {
 		super();
 		this.state = {
 			query: "",
-			todos: [],
+			todos: Map(),
 			selected: "none"
 		};
 
@@ -31,6 +32,8 @@ class UI extends Component {
 	}
 
 	render(props, state) {
+		const todos = Array.from(this.state.todos.entries());
+
 		return (
 			<div>
 				<br />
@@ -49,11 +52,8 @@ class UI extends Component {
 
 				<br />
 
-				{state.todos.map(({ value, checked, uuid }) => (
-					<TodoItem checked={checked} selected={this.state.selected === uuid}>
-						{value}
-						{"\n"}
-					</TodoItem>
+				{todos.map(([uuid, todo]) => (
+					<TodoItem todo={todo} selected={uuid === this.state.selected} />
 				))}
 			</div>
 		);
@@ -73,7 +73,7 @@ class UI extends Component {
 		const uuid = uuidv4();
 
 		this.setState(prevState => {
-			prevState.todos.push({ value, uuid });
+			prevState.todos = prevState.todos.set(uuid, Map({ value }));
 			prevState.query = "";
 			return prevState;
 		});
