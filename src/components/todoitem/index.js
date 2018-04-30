@@ -39,4 +39,13 @@ class TodoItem extends Component {
 	}
 }
 
+TodoItem.propTypes = {
+	todo: PropTypes.object.isRequired,
+	selected: PropTypes.bool
+};
+
+TodoItem.defaultProps = {
+	selected: false
+};
+
 module.exports = TodoItem;

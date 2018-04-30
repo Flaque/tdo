@@ -1,12 +1,10 @@
 #!/usr/bin/env node
 'use strict';
 
-const importJsx = require('import-jsx');
 const { h, render } = require('ink');
 const meow = require('meow');
 const clear = require('clear');
-
-const Ui = importJsx('./ui');
+const Ui = require('./ui');
 
 const cli = meow(
 	`
