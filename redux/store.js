@@ -1,6 +1,6 @@
 const { createStore } = require('redux');
 const { OrderedMap } = require('immutable');
-const { addTodo, nextTodo } = require('../lib/util');
+const { addTodo, nextTodo, prevTodo } = require('../lib/util');
 
 const submitTodo = (state, action) => {
 	const todos = addTodo(state.todos, action.value);
@@ -30,6 +30,11 @@ const reducer = (
 			return {
 				...state,
 				...{ selectedTodo: nextTodo(state.todos, state.selectedTodo) }
+			};
+		case 'MOVE_CURSOR_UP':
+			return {
+				...state,
+				...{ selectedTodo: prevTodo(state.todos, state.selectedTodo) }
 			};
 		default:
 			return state;

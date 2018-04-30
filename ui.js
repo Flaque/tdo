@@ -33,7 +33,9 @@ class UI extends Component {
 			case 'down':
 				store.dispatch({ type: 'MOVE_CURSOR_DOWN' });
 				break;
-
+			case 'up':
+				store.dispatch({ type: 'MOVE_CURSOR_UP' });
+				break;
 			default:
 				break;
 		}
