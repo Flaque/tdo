@@ -36,6 +36,9 @@ class UI extends Component {
 			case 'up':
 				store.dispatch({ type: 'MOVE_CURSOR_UP' });
 				break;
+			case 'return':
+				store.dispatch({ type: 'ENTER_PRESSED' });
+				break;
 			default:
 				break;
 		}

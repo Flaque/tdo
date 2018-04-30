@@ -11,18 +11,18 @@ test('QUERY_CHANGE will set the query value', t => {
 	t.deepEqual(store.getState().query, 'doggos');
 });
 
-test('QUERY_SUBMIT will wipe query value', t => {
+test('ENTER_PRESSED will wipe query value', t => {
 	store.dispatch({
-		type: 'QUERY_SUBMIT',
+		type: 'ENTER_PRESSED',
 		value: 'doggos'
 	});
 
 	t.deepEqual(store.getState().query, '');
 });
 
-test('QUERY_SUBMIT will add new todo', t => {
+test('ENTER_PRESSED will add new todo', t => {
 	store.dispatch({
-		type: 'QUERY_SUBMIT',
+		type: 'ENTER_PRESSED',
 		value: 'doggos'
 	});
 
@@ -33,9 +33,9 @@ test('QUERY_SUBMIT will add new todo', t => {
 	t.deepEqual(todo.get('value'), 'doggos');
 });
 
-test('QUERY_SUBMIT will add new todo with a uuid', t => {
+test('ENTER_PRESSED will add new todo with a uuid', t => {
 	store.dispatch({
-		type: 'QUERY_SUBMIT',
+		type: 'ENTER_PRESSED',
 		value: 'doggos'
 	});
 
@@ -47,9 +47,9 @@ test('QUERY_SUBMIT will add new todo with a uuid', t => {
 	t.true(isuuid(id));
 });
 
-test('QUERY_SUBMIT will set the selection on first submit', t => {
+test('ENTER_PRESSED will set the selection on first submit', t => {
 	store.dispatch({
-		type: 'QUERY_SUBMIT',
+		type: 'ENTER_PRESSED',
 		value: 'doggos'
 	});
 
@@ -57,14 +57,42 @@ test('QUERY_SUBMIT will set the selection on first submit', t => {
 	t.true(isuuid(id));
 });
 
+test('ENTER_PRESSED will check a box if no value passed', t => {
+	// Add something
+	store.dispatch({
+		type: 'ENTER_PRESSED',
+		value: 'doggos'
+	});
+
+	let todo = store
+		.getState()
+		.todos.valueSeq()
+		.get(0);
+
+	// Sanity check
+	t.true(!todo.get('checked'));
+
+	// Check the box
+	store.dispatch({
+		type: 'ENTER_PRESSED'
+	});
+
+	todo = store
+		.getState()
+		.todos.valueSeq()
+		.get(0);
+
+	t.true(todo.get('checked'));
+});
+
 test('MOVE_CURSOR_DOWN will change the selection to the next todo', t => {
 	store.dispatch({
-		type: 'QUERY_SUBMIT',
+		type: 'ENTER_PRESSED',
 		value: 'doggos'
 	});
 
 	store.dispatch({
-		type: 'QUERY_SUBMIT',
+		type: 'ENTER_PRESSED',
 		value: 'cattos'
 	});
 
