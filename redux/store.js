@@ -5,7 +5,8 @@ const { addTodo, nextTodo } = require('../lib/util');
 const submitTodo = (state, action) => {
 	const todos = addTodo(state.todos, action.value);
 	const selectedTodo =
-		todos.length === 1 ? todos.keySeq().get(0) : state.selectedTodo;
+		todos.count() === 1 ? todos.keySeq().get(0) : state.selectedTodo;
+
 	return {
 		...state,
 		...{
@@ -28,7 +29,7 @@ const reducer = (
 		case 'MOVE_CURSOR_DOWN':
 			return {
 				...state,
-				...{ selected: nextTodo(state.todos, state.selected) }
+				...{ selectedTodo: nextTodo(state.todos, state.selectedTodo) }
 			};
 		default:
 			return state;

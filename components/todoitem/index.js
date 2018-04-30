@@ -24,7 +24,9 @@ class TodoItem extends Component {
 		const { todo, selected } = props;
 
 		const txt = selected ? (
-			<Bold>a {todo.get('value')} a</Bold>
+			<Text blue>
+				<Bold>{todo.get('value')} </Bold>{' '}
+			</Text>
 		) : (
 			<span>{todo.get('value')}</span>
 		);

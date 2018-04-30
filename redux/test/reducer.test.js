@@ -46,3 +46,37 @@ test('QUERY_SUBMIT will add new todo with a uuid', t => {
 
 	t.true(isuuid(id));
 });
+
+test('QUERY_SUBMIT will set the selection on first submit', t => {
+	store.dispatch({
+		type: 'QUERY_SUBMIT',
+		value: 'doggos'
+	});
+
+	const id = store.getState().selectedTodo;
+	t.true(isuuid(id));
+});
+
+test('MOVE_CURSOR_DOWN will change the selection to the next todo', t => {
+	store.dispatch({
+		type: 'QUERY_SUBMIT',
+		value: 'doggos'
+	});
+
+	store.dispatch({
+		type: 'QUERY_SUBMIT',
+		value: 'cattos'
+	});
+
+	store.dispatch({
+		type: 'MOVE_CURSOR_DOWN'
+	});
+
+	const [first, second] = [...store.getState().todos.keys()];
+
+	// Sanity check
+	t.true(isuuid(first));
+	t.true(isuuid(second));
+
+	t.deepEqual(second, store.getState().selectedTodo);
+});
