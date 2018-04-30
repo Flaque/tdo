@@ -1,6 +1,7 @@
 const { h, StringComponent } = require('ink');
 const TextInput = require('ink-text-input');
 const PropTypes = require('prop-types');
+const { connect } = require('ink-redux');
 
 // TODO: Remove when ink 0.4.1 bug is fixed
 const chalk = require('chalk');
@@ -28,4 +29,13 @@ Query.propTypes = {
 	handleQuerySubmit: PropTypes.func.isRequired
 };
 
-module.exports = Query;
+const mapStateToProps = ({ query }) => ({
+	query
+});
+
+const mapDispatchToProps = {
+	handleQueryChange: value => ({ type: 'QUERY_CHANGE', value }),
+	handleQuerySubmit: value => ({ type: 'QUERY_SUBMIT', value })
+};
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Query);

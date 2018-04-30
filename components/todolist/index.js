@@ -1,6 +1,7 @@
 const { h } = require('ink');
 const PropTypes = require('prop-types');
 const importJsx = require('import-jsx');
+const { connect } = require('ink-redux');
 
 const TodoItem = importJsx('../todoitem');
 
@@ -20,4 +21,9 @@ TodoList.propTypes = {
 	selectedTodo: PropTypes.string.isRequired
 };
 
-module.exports = TodoList;
+const mapStateToProps = ({ todos, selectedTodo }) => ({
+	todos,
+	selectedTodo
+});
+
+module.exports = connect(mapStateToProps)(TodoList);

@@ -26,11 +26,19 @@ const App = ({
 	);
 };
 App.propTypes = {
-	todos: PropTypes.object.isRequired,
-	selectedTodo: PropTypes.string.isRequired,
-	handleQueryChange: PropTypes.func.isRequired,
-	handleQuerySubmit: PropTypes.func.isRequired,
-	query: PropTypes.string.isRequired
+	todos: PropTypes.object,
+	selectedTodo: PropTypes.string,
+	handleQueryChange: PropTypes.func,
+	handleQuerySubmit: PropTypes.func,
+	query: PropTypes.string
+};
+
+App.defaultProps = {
+	todos: new Map(),
+	selectedTodo: '',
+	handleQueryChange: () => {},
+	handleQuerySubmit: () => {},
+	query: ''
 };
 
 module.exports = App;
