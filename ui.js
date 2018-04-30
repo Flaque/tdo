@@ -1,81 +1,21 @@
-"use strict";
+'use strict';
 
-const { h, Component, StringComponent, Text } = require("ink");
-const TextInput = require("ink-text-input");
-const PropTypes = require("prop-types");
-const importJsx = require("import-jsx");
-const Bar = importJsx("./components/bar");
-const TodoItem = importJsx("./components/todoitem");
-const uuidv4 = require("uuid/v4");
-const { Map } = require("immutable");
+const { h, Component } = require('ink');
+const importJsx = require('import-jsx');
+const uuidv4 = require('uuid/v4');
+const { Map } = require('immutable');
+const { Provider } = require('ink-redux');
+const store = require('./store.js');
 
-// TODO: Remove when ink 0.4.1 bug is fixed
-const chalk = require("chalk");
-class Bold extends StringComponent {
-	renderString(children) {
-		return chalk.bold(children);
-	}
-}
-
-const Header = () => (
-	<Text>
-		<br />
-		<Bold>Tdo</Bold> <Text gray>Press ctrl-c to exit. </Text>
-		<br /> <br />
-	</Text>
-);
-
-const Query = ({ query, handleQueryChange, handleQuerySubmit }) => (
-	<div>
-		<Bold>{"~ "}</Bold>
-		<TextInput
-			value={query}
-			onChange={handleQueryChange}
-			onSubmit={handleQuerySubmit}
-			placeholder="ex: feed dogs by saturday"
-		/>
-	</div>
-);
-
-const Todos = ({ todos, selectedTodo }) => {
-	const dos = Array.from(todos.entries());
-
-	return (
-		<div>
-			{dos.map(([uuid, todo]) => (
-				<TodoItem todo={todo} selected={uuid === selectedTodo} />
-			))}
-		</div>
-	);
-};
-
-const App = ({
-	todos,
-	selectedTodo,
-	handleQueryChange,
-	handleQuerySubmit,
-	query
-}) => {
-	return (
-		<div>
-			<Header />
-			<Query
-				query={query}
-				handleQueryChange={handleQueryChange}
-				handleQuerySubmit={handleQuerySubmit}
-			/>
-			<Todos todos={todos} selectedTodo={selectedTodo} />
-		</div>
-	);
-};
+const App = importJsx('./components/app');
 
 class UI extends Component {
 	constructor() {
 		super();
 		this.state = {
-			query: "",
-			todos: Map(),
-			selected: "none"
+			query: '',
+			todos: new Map(),
+			selected: 'none'
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -83,19 +23,21 @@ class UI extends Component {
 		this.handleSelectItem = this.handleSelectItem.bind(this);
 	}
 
-	render(props, state) {
+	render() {
 		return (
-			<App
-				todos={this.state.todos}
-				selectedTodo={this.state.selected}
-				handleQueryChange={this.handleChange}
-				handleQuerySubmit={this.handleSubmit}
-				query={this.state.query}
-			/>
+			<Provider store={store}>
+				<App
+					todos={this.state.todos}
+					selectedTodo={this.state.selected}
+					handleQueryChange={this.handleChange}
+					handleQuerySubmit={this.handleSubmit}
+					query={this.state.query}
+				/>
+			</Provider>
 		);
 	}
 
-	handleSelectItem(item) {
+	handleSelectItem() {
 		// Do something
 	}
 
@@ -109,19 +51,11 @@ class UI extends Component {
 		const uuid = uuidv4();
 
 		this.setState(prevState => {
-			prevState.todos = prevState.todos.set(uuid, Map({ value }));
-			prevState.query = "";
+			prevState.todos = prevState.todos.set(uuid, new Map({ value }));
+			prevState.query = '';
 			return prevState;
 		});
 	}
 }
-
-UI.propTypes = {
-	name: PropTypes.string
-};
-
-UI.defaultProps = {
-	name: "Ink"
-};
 
 module.exports = UI;

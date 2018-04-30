@@ -2,9 +2,9 @@
 'use strict';
 
 const importJsx = require('import-jsx');
-const {h, render} = require('ink');
+const { h, render } = require('ink');
 const meow = require('meow');
-const clear = require("clear");
+const clear = require('clear');
 
 const Ui = importJsx('./ui');
 
@@ -22,5 +22,5 @@ const cli = meow(`
 	  I love ponies
 `);
 
-clear(); // "Full screen" effect like in vim 
+clear(); // "Full screen" effect like in vim
 render(h(Ui, cli.flags));

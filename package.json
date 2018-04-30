@@ -15,16 +15,14 @@
 	},
 	"scripts": {
 		"start": "node cli.js",
-		"test": "xo && ava"
+		"test": "xo && ava",
+		"lint": "xo",
+		"fmt": "prettier --write *.js"
 	},
-	"files": [
-		"cli.js",
-		"ui.js"
-	],
-	"keywords": [
-		""
-	],
+	"files": ["cli.js", "ui.js"],
+	"keywords": [""],
 	"dependencies": {
+		"chalk": "^2.4.1",
 		"clear": "^0.1.0",
 		"immutable": "^3.8.2",
 		"ink": "^0.4.1",
@@ -40,10 +38,15 @@
 	"devDependencies": {
 		"ava": "^0.20.0",
 		"babel-plugin-transform-react-jsx": "^6.24.1",
+		"eslint": "^4.19.1",
+		"eslint-config-prettier": "^2.9.0",
 		"eslint-config-xo-react": "^0.13.0",
-		"eslint-plugin-react": "^7.1.0",
+		"eslint-plugin-prettier": "^2.6.0",
+		"eslint-plugin-react": "^7.7.0",
 		"import-jsx": "^1.2.0",
-		"xo": "^0.18.2"
+		"js-yaml": "^3.11.0",
+		"prettier": "1.12.1",
+		"xo": "^0.20.3"
 	},
 	"babel": {
 		"plugins": [
@@ -55,11 +58,12 @@
 			]
 		]
 	},
+	"prettier": {
+		"singleQuote": true
+	},
 	"ava": {
 		"babel": {
-			"presets": [
-				"@ava/stage-4"
-			],
+			"presets": ["@ava/stage-4"],
 			"plugins": [
 				[
 					"transform-react-jsx",
@@ -72,11 +76,12 @@
 		}
 	},
 	"xo": {
-		"extends": [
-			"xo-react"
-		],
+		"extends": ["xo-react", "prettier"],
+		"plugins": ["prettier"],
 		"rules": {
-			"react/no-unused-prop-types": 1
+			"react/no-unused-prop-types": 1,
+			"react/jsx-tag-spacing": "off",
+			"react/jsx-handler-names": "off"
 		},
 		"settings": {
 			"react": {

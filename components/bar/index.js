@@ -1,16 +1,16 @@
-"use strict";
+'use strict';
 
-const { h, Component, Text } = require("ink");
+const { h, Component, Text } = require('ink');
 
 class Bar extends Component {
 	render(props) {
-		const columns = process.stdout.columns;
+		const { columns } = process.stdout;
 		const chars = props.character.repeat(columns).substring(0, columns);
 		return (
 			<Text>
-				{"\n"}
+				{'\n'}
 				{chars}
-				{"\n"}
+				{'\n'}
 			</Text>
 		);
 	}
