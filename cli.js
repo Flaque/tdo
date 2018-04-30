@@ -1,9 +1,6 @@
 #!/usr/bin/env node
 'use strict';
 
-// Overload console.log for testing
-require('./log');
-
 const importJsx = require('import-jsx');
 const { h, render } = require('ink');
 const meow = require('meow');
