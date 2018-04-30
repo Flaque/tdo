@@ -1,6 +1,6 @@
 {
 	"name": "tdo",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "My rad module",
 	"license": "MIT",
 	"repository": "Flaque/tdo",
@@ -20,8 +20,13 @@
 		"lint": "xo",
 		"fmt": "prettier --write *.js"
 	},
-	"files": ["cli.js", "ui.js"],
-	"keywords": [""],
+	"files": [
+		"cli.js",
+		"ui.js"
+	],
+	"keywords": [
+		""
+	],
 	"dependencies": {
 		"chalk": "^2.4.1",
 		"clear": "^0.1.0",
@@ -67,7 +72,9 @@
 	},
 	"ava": {
 		"babel": {
-			"presets": ["@ava/stage-4"],
+			"presets": [
+				"@ava/stage-4"
+			],
 			"plugins": [
 				[
 					"transform-react-jsx",
@@ -80,8 +87,13 @@
 		}
 	},
 	"xo": {
-		"extends": ["xo-react", "prettier"],
-		"plugins": ["prettier"],
+		"extends": [
+			"xo-react",
+			"prettier"
+		],
+		"plugins": [
+			"prettier"
+		],
 		"rules": {
 			"react/no-unused-prop-types": 1,
 			"react/jsx-tag-spacing": "off",
