@@ -17,6 +17,58 @@ class Bold extends StringComponent {
 	}
 }
 
+const Header = () => (
+	<Text>
+		<br />
+		<Bold>Tdo</Bold> <Text gray>Press ctrl-c to exit. </Text>
+		<br /> <br />
+	</Text>
+);
+
+const Query = ({ query, handleQueryChange, handleQuerySubmit }) => (
+	<div>
+		<Bold>{"~ "}</Bold>
+		<TextInput
+			value={query}
+			onChange={handleQueryChange}
+			onSubmit={handleQuerySubmit}
+			placeholder="ex: feed dogs by saturday"
+		/>
+	</div>
+);
+
+const Todos = ({ todos, selectedTodo }) => {
+	const dos = Array.from(todos.entries());
+
+	return (
+		<div>
+			{dos.map(([uuid, todo]) => (
+				<TodoItem todo={todo} selected={uuid === selectedTodo} />
+			))}
+		</div>
+	);
+};
+
+const App = ({
+	todos,
+	selectedTodo,
+	handleQueryChange,
+	handleQuerySubmit,
+	query
+}) => {
+	return (
+		<div>
+			<Header />
+			<Query
+				query={query}
+				handleQueryChange={handleQueryChange}
+				handleQuerySubmit={handleQuerySubmit}
+			/>
+			<Todos todos={todos} selectedTodo={selectedTodo} />
+		</div>
+	);
+};
+
 class UI extends Component {
 	constructor() {
 		super();
@@ -32,30 +84,14 @@ class UI extends Component {
 	}
 
 	render(props, state) {
-		const todos = Array.from(this.state.todos.entries());
-
 		return (
-			<div>
-				<br />
-
-				<Text>
-					<Bold>Tdo</Bold> <Text gray>Press ctrl-c to exit. </Text> {"\n\n"}
-				</Text>
-
-				<Bold>{"~ "}</Bold>
-				<TextInput
-					value={state.query}
-					onChange={this.handleChange}
-					onSubmit={this.handleSubmit}
-					placeholder="ex: feed dogs by saturday"
-				/>
-
-				<br />
-
-				{todos.map(([uuid, todo]) => (
-					<TodoItem todo={todo} selected={uuid === this.state.selected} />
-				))}
-			</div>
+			<App
+				todos={this.state.todos}
+				selectedTodo={this.state.selected}
+				handleQueryChange={this.handleChange}
+				handleQuerySubmit={this.handleSubmit}
+				query={this.state.query}
+			/>
 		);
 	}
 
