@@ -12,7 +12,11 @@ class Bold extends StringComponent {
 
 const Check = ({ checked }) => <span>{checked ? '[x]' : '[ ]'}</span>;
 Check.propTypes = {
-	checked: PropTypes.bool.isRequired
+	checked: PropTypes.bool
+};
+
+Check.defaultProps = {
+	checked: false
 };
 
 class TodoItem extends Component {

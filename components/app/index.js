@@ -45,7 +45,7 @@ const Todos = ({ todos, selectedTodo }) => {
 };
 Todos.propTypes = {
 	todos: PropTypes.array.isRequired,
-	selectedTodo: PropTypes.func.isRequired
+	selectedTodo: PropTypes.string.isRequired
 };
 
 const App = ({
