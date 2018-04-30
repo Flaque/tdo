@@ -1,33 +1,21 @@
 # todo [![Build Status](https://travis-ci.org/Flaque/todo.svg?branch=master)](https://travis-ci.org/Flaque/todo)
 
-> My rad module
-
+> An interactive todo app
 
 ## Install
 
 ```
-$ npm install --global todo
+$ npm install --global tdo
 ```
-
 
 ## Usage
 
 ```js
-$ todo --help
+$ tdo --help
 
   Usage
-    todo [input]
-
-  Options
-    --name  Lorem ipsum [Default: false]
-
-  Examples
-    $ todo
-    I love Ink
-    $ todo --name=ponies
-    I love ponies
+    tdo
 ```
-
 
 ## License
 
