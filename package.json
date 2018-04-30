@@ -14,13 +14,18 @@
 		"node": ">=6"
 	},
 	"scripts": {
-		"start": "node cli.js",
+		"dev": "node cli.js --noclear",
 		"test": "xo && ava",
 		"lint": "xo",
 		"fmt": "prettier --write *.js"
 	},
-	"files": ["cli.js", "ui.js"],
-	"keywords": [""],
+	"files": [
+		"cli.js",
+		"ui.js"
+	],
+	"keywords": [
+		""
+	],
 	"dependencies": {
 		"chalk": "^2.4.1",
 		"clear": "^0.1.0",
@@ -30,9 +35,11 @@
 		"ink-select": "^1.2.0",
 		"ink-select-flaque-patch": "^1.2.0",
 		"ink-text-input": "^1.1.1",
+		"keypress": "^0.2.1",
 		"meow": "^3.7.0",
 		"prop-types": "^15.5.10",
 		"redux": "^4.0.0",
+		"redux-logger": "^3.0.6",
 		"uuid": "^3.2.1"
 	},
 	"devDependencies": {
@@ -44,6 +51,7 @@
 		"eslint-plugin-prettier": "^2.6.0",
 		"eslint-plugin-react": "^7.7.0",
 		"import-jsx": "^1.2.0",
+		"isuuid": "^0.1.0",
 		"js-yaml": "^3.11.0",
 		"prettier": "1.12.1",
 		"xo": "^0.20.3"
@@ -63,7 +71,9 @@
 	},
 	"ava": {
 		"babel": {
-			"presets": ["@ava/stage-4"],
+			"presets": [
+				"@ava/stage-4"
+			],
 			"plugins": [
 				[
 					"transform-react-jsx",
@@ -76,12 +86,18 @@
 		}
 	},
 	"xo": {
-		"extends": ["xo-react", "prettier"],
-		"plugins": ["prettier"],
+		"extends": [
+			"xo-react",
+			"prettier"
+		],
+		"plugins": [
+			"prettier"
+		],
 		"rules": {
 			"react/no-unused-prop-types": 1,
 			"react/jsx-tag-spacing": "off",
-			"react/jsx-handler-names": "off"
+			"react/jsx-handler-names": "off",
+			"import/no-unassigned-import": "off"
 		},
 		"settings": {
 			"react": {

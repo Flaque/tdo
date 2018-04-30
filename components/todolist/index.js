@@ -17,7 +17,7 @@ const TodoList = ({ todos, selectedTodo }) => {
 	);
 };
 TodoList.propTypes = {
-	todos: PropTypes.array.isRequired,
+	todos: PropTypes.object.isRequired,
 	selectedTodo: PropTypes.string.isRequired
 };
 

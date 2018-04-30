@@ -21,10 +21,10 @@ Check.defaultProps = {
 
 class TodoItem extends Component {
 	render(props) {
-		const { todo } = props;
+		const { todo, selected } = props;
 
-		const txt = todo.get('selected') ? (
-			<Bold>{todo.get('value')}</Bold>
+		const txt = selected ? (
+			<Bold>a {todo.get('value')} a</Bold>
 		) : (
 			<span>{todo.get('value')}</span>
 		);

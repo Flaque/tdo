@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
+// Overload console.log for testing
+require('./log');
+
 const importJsx = require('import-jsx');
 const { h, render } = require('ink');
 const meow = require('meow');
@@ -8,19 +11,30 @@ const clear = require('clear');
 
 const Ui = importJsx('./ui');
 
-const cli = meow(`
+const cli = meow(
+	`
 	Usage
-	  $ todo [input]
+	  $ todo 
 
 	Options
-	  --name  Lorem ipsum [Default: false]
+	  --noclear doesnt go full screen [Default: false]
 
 	Examples
 	  $ todo
-	  I love Ink
-	  $ todo --name=ponies
-	  I love ponies
-`);
+	  $ todo --noclear
+`,
+	{
+		flags: {
+			noclear: {
+				type: 'boolean',
+				alias: 'noclear'
+			}
+		}
+	}
+);
 
-clear(); // "Full screen" effect like in vim
+if (!cli.flags.noclear) {
+	clear(); // "Full screen" effect like in vim
+}
+
 render(h(Ui, cli.flags));
