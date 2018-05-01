@@ -12,7 +12,7 @@ class Bold extends StringComponent {
 const Header = () => (
 	<Text>
 		<br />
-		<Bold>Tdo</Bold> <Text gray>Press ctrl-c to exit. </Text>
+		<Bold>Tdo</Bold> <Text dim>Press ctrl-c to exit. </Text>
 		<br /> <br />
 	</Text>
 );
