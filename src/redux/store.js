@@ -13,7 +13,7 @@ const persistConfig = {
 	transforms: [immutableTransform()]
 };
 
-const submitTodo = (state, action) => {
+const add = (state, action) => {
 	const todos = addTodo(state.todos, action.value);
 	const selectedTodo =
 		todos.count() === 1 ? todos.keySeq().get(0) : state.selectedTodo;
@@ -28,6 +28,13 @@ const submitTodo = (state, action) => {
 	};
 };
 
+const check = state => {
+	return {
+		...state,
+		...{ todos: checkTodo(state.todos, state.selectedTodo) }
+	};
+};
+
 const reducer = (
 	state = { query: '', selectedTodo: '', todos: new OrderedMap() },
 	action
@@ -37,12 +44,9 @@ const reducer = (
 			return { ...state, ...{ query: action.value } };
 		case 'ENTER_PRESSED':
 			if (action.value === undefined || action.value === '') {
-				return {
-					...state,
-					...{ todos: checkTodo(state.todos, state.selectedTodo) }
-				};
+				return check(state);
 			}
-			return submitTodo(state, action);
+			return add(state, action);
 		case 'MOVE_CURSOR_DOWN':
 			return {
 				...state,
