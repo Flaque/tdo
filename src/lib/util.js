@@ -44,9 +44,18 @@ const checkTodo = (todos, id) => {
 	return todos.set(id, todo);
 };
 
+const removeTodo = (todos, id) => {
+	if (todos.count() === 0) {
+		return todos;
+	}
+
+	return todos.delete(id);
+};
+
 module.exports = {
 	addTodo,
 	nextTodo,
 	prevTodo,
-	checkTodo
+	checkTodo,
+	removeTodo
 };

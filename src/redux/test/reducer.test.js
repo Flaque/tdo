@@ -63,47 +63,6 @@ test.serial('ENTER_PRESSED will set the selection on first submit', t => {
 	t.true(isuuid(id));
 });
 
-test.serial('ENTER_PRESSED will check a box if no value passed', t => {
-	// Add something
-	store.dispatch({
-		type: 'ENTER_PRESSED',
-		value: 'doggos'
-	});
-
-	let todo = store
-		.getState()
-		.todos.valueSeq()
-		.get(0);
-
-	// Sanity check
-	t.true(!todo.get('checked'));
-
-	// Check the box
-	store.dispatch({
-		type: 'ENTER_PRESSED'
-	});
-
-	todo = store
-		.getState()
-		.todos.valueSeq()
-		.get(0);
-
-	t.true(todo.get('checked'));
-
-	// Uncheck the box
-	store.dispatch({
-		type: 'ENTER_PRESSED'
-	});
-
-	todo = store
-		.getState()
-		.todos.valueSeq()
-		.get(0);
-
-	t.false(todo.get('checked'));
-	t.deepEqual(store.getState().todos.count(), 1);
-});
-
 test.serial(
 	'MOVE_CURSOR_DOWN will change the selection to the next todo',
 	t => {

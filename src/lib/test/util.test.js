@@ -1,7 +1,13 @@
 const test = require('ava');
 const isuuid = require('isuuid');
 const { OrderedMap } = require('immutable');
-const { addTodo, nextTodo, prevTodo, checkTodo } = require('../util');
+const {
+	addTodo,
+	nextTodo,
+	prevTodo,
+	removeTodo,
+	checkTodo
+} = require('../util');
 
 test('adding todos assigns them an id', t => {
 	const todos = new OrderedMap();
@@ -74,4 +80,11 @@ test('checkTodo will not check anything if there are no todos', t => {
 	const newTodos = checkTodo(baseTodos, 'foo');
 
 	t.deepEqual(baseTodos, newTodos);
+});
+
+test('removeTodo will get rid of a todo', t => {
+	const todos = addTodo(new OrderedMap(), 'doggos');
+	const id = todos.keySeq().first();
+
+	t.deepEqual(removeTodo(todos, id).count(), 0);
 });
