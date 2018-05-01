@@ -1,6 +1,6 @@
 {
 	"name": "tdo",
-	"version": "0.1.0",
+	"version": "0.2.0",
 	"description": "My rad module",
 	"license": "MIT",
 	"repository": "Flaque/tdo",
@@ -25,8 +25,12 @@
 		"pretest": "npm run build",
 		"prepublish": "npm run build"
 	},
-	"files": ["dist"],
-	"keywords": [""],
+	"files": [
+		"dist"
+	],
+	"keywords": [
+		""
+	],
 	"dependencies": {
 		"@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.46",
 		"chalk": "^2.4.1",
@@ -74,11 +78,18 @@
 		"singleQuote": true
 	},
 	"ava": {
-		"require": ["@babel/register"]
+		"require": [
+			"@babel/register"
+		]
 	},
 	"xo": {
-		"extends": ["xo-react", "prettier"],
-		"plugins": ["prettier"],
+		"extends": [
+			"xo-react",
+			"prettier"
+		],
+		"plugins": [
+			"prettier"
+		],
 		"rules": {
 			"react/no-unused-prop-types": 1,
 			"react/jsx-tag-spacing": "off",
