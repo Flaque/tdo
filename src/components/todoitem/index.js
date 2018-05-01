@@ -20,8 +20,8 @@ Check.defaultProps = {
 };
 
 class TodoItem extends Component {
-	render(props) {
-		const { todo, selected } = props;
+	render() {
+		const { todo, selected } = this.props;
 
 		const txt = selected ? (
 			<Text blue>
@@ -38,5 +38,14 @@ class TodoItem extends Component {
 		);
 	}
 }
+
+TodoItem.propTypes = {
+	todo: PropTypes.object.isRequired,
+	selected: PropTypes.bool
+};
+
+TodoItem.defaultProps = {
+	selected: false
+};
 
 module.exports = TodoItem;

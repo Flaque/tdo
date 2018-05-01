@@ -35,7 +35,7 @@ const mapStateToProps = ({ query }) => ({
 
 const mapDispatchToProps = {
 	handleQueryChange: value => ({ type: 'QUERY_CHANGE', value }),
-	handleQuerySubmit: value => ({ type: 'QUERY_SUBMIT', value })
+	handleQuerySubmit: value => ({ type: 'ENTER_PRESSED', value })
 };
 
 module.exports = connect(mapStateToProps, mapDispatchToProps)(Query);

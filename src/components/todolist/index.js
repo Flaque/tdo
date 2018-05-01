@@ -1,9 +1,8 @@
 const { h } = require('ink');
 const PropTypes = require('prop-types');
-const importJsx = require('import-jsx');
 const { connect } = require('ink-redux');
 
-const TodoItem = importJsx('../todoitem');
+const TodoItem = require('../todoitem');
 
 const TodoList = ({ todos, selectedTodo }) => {
 	const dos = [...todos.entries()];

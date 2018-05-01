@@ -1,6 +1,6 @@
 const { createStore } = require('redux');
 const { OrderedMap } = require('immutable');
-const { addTodo, nextTodo, prevTodo } = require('../lib/util');
+const { addTodo, nextTodo, prevTodo, checkTodo } = require('../lib/util');
 
 const submitTodo = (state, action) => {
 	const todos = addTodo(state.todos, action.value);
@@ -24,7 +24,13 @@ const reducer = (
 	switch (action.type) {
 		case 'QUERY_CHANGE':
 			return { ...state, ...{ query: action.value } };
-		case 'QUERY_SUBMIT':
+		case 'ENTER_PRESSED':
+			if (action.value === undefined || action.value === '') {
+				return {
+					...state,
+					...{ todos: checkTodo(state.todos, state.selectedTodo) }
+				};
+			}
 			return submitTodo(state, action);
 		case 'MOVE_CURSOR_DOWN':
 			return {
@@ -41,6 +47,8 @@ const reducer = (
 	}
 };
 
-const store = createStore(reducer);
+const getStore = () => {
+	return createStore(reducer);
+};
 
-module.exports = store;
+module.exports = getStore;

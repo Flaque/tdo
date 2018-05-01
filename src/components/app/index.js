@@ -1,10 +1,8 @@
 const { h } = require('ink');
 const PropTypes = require('prop-types');
-const importJsx = require('import-jsx');
-
-const Query = importJsx('../query');
-const Header = importJsx('../header');
-const TodoList = importJsx('../todolist');
+const Query = require('../query');
+const Header = require('../header');
+const TodoList = require('../todolist');
 
 const App = ({
 	todos,

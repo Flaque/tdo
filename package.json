@@ -9,29 +9,30 @@
 		"email": "econrad@zagmail.gonzaga.edu",
 		"url": "http://flaque.net"
 	},
-	"bin": "cli.js",
+	"bin": "dist/cli.js",
 	"engines": {
-		"node": ">=6"
+		"node": ">=8.0.0"
+	},
+	"release": {
+		"branch": "master"
 	},
 	"scripts": {
-		"start": "node cli.js",
-		"dev": "node cli.js --noclear",
-		"test": "xo && ava",
+		"test": "ava",
 		"lint": "xo",
-		"fmt": "prettier --write *.js"
+		"fmt": "prettier --write *.js",
+		"build": "babel src --out-dir dist --ignore __tests__",
+		"dev": "babel -w src --out-dir dist --ignore __tests__",
+		"pretest": "npm run build",
+		"prepublish": "npm run build"
 	},
 	"files": [
-		"cli.js",
-		"ui.js",
-		"log.js",
-		"components",
-		"lib",
-		"redux"
+		"dist"
 	],
 	"keywords": [
 		""
 	],
 	"dependencies": {
+		"@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.46",
 		"chalk": "^2.4.1",
 		"clear": "^0.1.0",
 		"immutable": "^3.8.2",
@@ -49,8 +50,12 @@
 		"uuid": "^3.2.1"
 	},
 	"devDependencies": {
-		"ava": "^0.20.0",
-		"babel-plugin-transform-react-jsx": "^6.24.1",
+		"@babel/cli": "^7.0.0-beta.46",
+		"@babel/core": "^7.0.0-beta.46",
+		"@babel/preset-env": "^7.0.0-beta.46",
+		"@babel/preset-react": "7.0.0-beta.46",
+		"@babel/register": "^7.0.0-beta.46",
+		"ava": "1.0.0-beta.4",
 		"eslint": "^4.19.1",
 		"eslint-config-prettier": "^2.9.0",
 		"eslint-config-xo-react": "^0.13.0",
@@ -58,37 +63,17 @@
 		"eslint-plugin-react": "^7.7.0",
 		"isuuid": "^0.1.0",
 		"js-yaml": "^3.11.0",
+		"nyc": "^11.7.1",
 		"prettier": "1.12.1",
 		"xo": "^0.20.3"
-	},
-	"babel": {
-		"plugins": [
-			[
-				"transform-react-jsx",
-				{
-					"pragma": "h"
-				}
-			]
-		]
 	},
 	"prettier": {
 		"singleQuote": true
 	},
 	"ava": {
-		"babel": {
-			"presets": [
-				"@ava/stage-4"
-			],
-			"plugins": [
-				[
-					"transform-react-jsx",
-					{
-						"pragma": "h",
-						"useBuiltIns": true
-					}
-				]
-			]
-		}
+		"require": [
+			"@babel/register"
+		]
 	},
 	"xo": {
 		"extends": [

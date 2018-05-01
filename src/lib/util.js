@@ -1,7 +1,8 @@
 const uuidv4 = require('uuid/v4');
 const { Map } = require('immutable');
 
-const addTodo = (todos, value) => todos.set(uuidv4(), new Map({ value }));
+const addTodo = (todos, value) =>
+	todos.set(uuidv4(), new Map({ value, checked: false }));
 
 const nextTodo = (todos, current) => {
 	if (current === undefined) {
@@ -31,8 +32,21 @@ const prevTodo = (todos, current) => {
 	return ids.get(prevIndex);
 };
 
+const checkTodo = (todos, id) => {
+	if (todos.count() === 0) {
+		return todos;
+	}
+
+	let todo = todos.get(id);
+	const before = todo.get('checked') || false;
+	todo = todo.set('checked', !before);
+
+	return todos.set(id, todo);
+};
+
 module.exports = {
 	addTodo,
 	nextTodo,
-	prevTodo
+	prevTodo,
+	checkTodo
 };
