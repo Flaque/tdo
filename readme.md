@@ -2,6 +2,8 @@
 
 > An interactive todo app
 
+![screenshot](https://i.imgur.com/2WXFrpJ.png) 
+
 ## Install
 
 ```
