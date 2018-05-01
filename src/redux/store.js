@@ -1,6 +1,17 @@
 const { createStore } = require('redux');
 const { OrderedMap } = require('immutable');
+const immutableTransform = require('redux-persist-transform-immutable');
+const { persistStore, persistReducer } = require('redux-persist');
+const { AsyncNodeStorage } = require('redux-persist-node-storage');
 const { addTodo, nextTodo, prevTodo, checkTodo } = require('../lib/util');
+const { getTdoPath } = require('../io/util');
+
+const storage = new AsyncNodeStorage(getTdoPath());
+const persistConfig = {
+	key: 'root',
+	storage,
+	transforms: [immutableTransform()]
+};
 
 const submitTodo = (state, action) => {
 	const todos = addTodo(state.todos, action.value);
@@ -48,7 +59,9 @@ const reducer = (
 };
 
 const getStore = () => {
-	return createStore(reducer);
+	const persistedReducer = persistReducer(persistConfig, reducer);
+	const store = createStore(persistedReducer);
+	return { store, persistor: persistStore(store) };
 };
 
 module.exports = getStore;

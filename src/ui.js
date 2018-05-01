@@ -5,7 +5,7 @@ const { Provider } = require('ink-redux');
 const getStore = require('./redux/store.js');
 const App = require('./components/app');
 
-const store = getStore();
+const { store } = getStore();
 const { stdin } = process;
 
 class UI extends Component {
