@@ -2,10 +2,10 @@ const isuuid = require('isuuid');
 const test = require('ava');
 const getStore = require('../store');
 
-let store = getStore();
+let { store } = getStore();
 
 test.beforeEach(() => {
-	store = getStore();
+	store = getStore().store;
 });
 
 test.serial('QUERY_CHANGE will set the query value', t => {
